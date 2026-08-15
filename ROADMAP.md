@@ -24,11 +24,12 @@ This roadmap describes intended directions, not guaranteed deadlines. Priorities
 - Clear update behavior and cache controls
 - Browser-level offline tests
 
-## Planned
+## In progress
 
 ### v0.4 — Editing and access
 
-- Rotation and cropping
+- Rotation in 90-degree increments
+- Cropping
 - Additional interface languages
 - Keyboard and screen-reader review
 - More output-size controls

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'imagetool-v0.3.0'
+const CACHE_NAME = 'imagetool-v0.4.0'
 const APP_SHELL = [
   './',
   './index.html',

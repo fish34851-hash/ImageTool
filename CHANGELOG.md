@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Added
+
+- Rotate selected images in 90-degree increments before conversion
+- Visible keyboard focus and reduced-motion support
+- Accessible control groups and live status announcements
+
 ## [0.3.0] - 2026-08-15
 
 ### Added

@@ -1,9 +1,11 @@
 const test = require('node:test')
 const assert = require('node:assert/strict')
 const {
+  calculateRotatedDimensions,
   calculateTargetDimensions,
   formatBytes,
   makeOutputName,
+  normalizeRotation,
 } = require('../src/core.js')
 
 test('formatBytes formats common sizes', () => {
@@ -29,4 +31,18 @@ test('calculateTargetDimensions accepts a single limit', () => {
 
 test('calculateTargetDimensions never upscales', () => {
   assert.deepEqual(calculateTargetDimensions(640, 480, 1920, 1080), { width: 640, height: 480 })
+})
+
+test('normalizeRotation accepts only right-angle turns', () => {
+  assert.equal(normalizeRotation(90), 90)
+  assert.equal(normalizeRotation(-90), 270)
+  assert.equal(normalizeRotation(450), 90)
+  assert.equal(normalizeRotation(45), 0)
+})
+
+test('calculateRotatedDimensions swaps width and height for quarter turns', () => {
+  assert.deepEqual(calculateRotatedDimensions(1600, 900, 0), { width: 1600, height: 900 })
+  assert.deepEqual(calculateRotatedDimensions(1600, 900, 90), { width: 900, height: 1600 })
+  assert.deepEqual(calculateRotatedDimensions(1600, 900, 180), { width: 1600, height: 900 })
+  assert.deepEqual(calculateRotatedDimensions(1600, 900, 270), { width: 900, height: 1600 })
 })

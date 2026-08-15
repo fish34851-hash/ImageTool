@@ -6,7 +6,7 @@ ImageTool is a zero-dependency static web application. It can run from a local f
 
 - `index.html` defines the accessible interface and loads local assets.
 - `src/app.js` owns browser interaction, image decoding, Canvas rendering, and downloads.
-- `src/core.js` contains deterministic formatting, filename, and resize calculations shared by the app and tests.
+- `src/core.js` contains deterministic formatting, filename, resize, and rotation calculations shared by the app and tests.
 - `src/styles.css` provides the responsive visual system.
 - `manifest.webmanifest` describes the installable application experience.
 - `service-worker.js` caches only the same-origin application shell for offline use.
@@ -17,7 +17,7 @@ ImageTool is a zero-dependency static web application. It can run from a local f
 
 1. The user selects local files through the file input or drag and drop.
 2. The browser creates temporary object URLs for decoding and preview.
-3. Canvas draws pixels into a new image at the requested dimensions.
+3. Canvas rotates and draws pixels into a new image at the requested dimensions.
 4. `canvas.toBlob` creates the requested PNG, JPG, or WebP output.
 5. The browser exposes temporary local download links.
 6. Object URLs are revoked when results change or the page closes.

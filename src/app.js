@@ -1,6 +1,12 @@
 const MAX_FILES = 20
 const SUPPORTED_TYPES = ['image/png', 'image/jpeg', 'image/webp']
-const { calculateTargetDimensions, formatBytes, makeOutputName } = window.ImageToolCore
+const {
+  calculateRotatedDimensions,
+  calculateTargetDimensions,
+  formatBytes,
+  makeOutputName,
+  normalizeRotation,
+} = window.ImageToolCore
 
 const elements = {
   chooseButton: document.querySelector('#choose-button'),
@@ -17,12 +23,15 @@ const elements = {
   maxWidth: document.querySelector('#max-width'),
   networkStatus: document.querySelector('#network-status'),
   previewImage: document.querySelector('#preview-image'),
+  previewFrame: document.querySelector('.preview-frame'),
   quality: document.querySelector('#quality'),
   qualityOutput: document.querySelector('#quality-output'),
   qualitySetting: document.querySelector('#quality-setting'),
   resetButton: document.querySelector('#reset-button'),
   resizeEnabled: document.querySelector('#resize-enabled'),
   resizeFields: document.querySelector('#resize-fields'),
+  rotationButtons: [...document.querySelectorAll('[data-rotation]')],
+  rotationOutput: document.querySelector('#rotation-output'),
   resultBox: document.querySelector('#result-box'),
   resultList: document.querySelector('#result-list'),
   resultSummary: document.querySelector('#result-summary'),
@@ -35,6 +44,7 @@ let currentFiles = []
 let previewUrl = ''
 let resultUrls = []
 let outputFormat = 'image/webp'
+let rotation = 0
 let deferredInstallPrompt = null
 
 function showError(message = '') {
@@ -58,6 +68,27 @@ function loadImage(url) {
     image.onerror = () => reject(new Error('无法读取图片，请尝试其他文件。'))
     image.src = url
   })
+}
+
+function updatePreviewRotation() {
+  const isQuarterTurn = rotation === 90 || rotation === 270
+  const scale = isQuarterTurn
+    ? Math.min(1, elements.previewFrame.clientWidth / elements.previewFrame.clientHeight,
+      elements.previewFrame.clientHeight / elements.previewFrame.clientWidth)
+    : 1
+  elements.previewImage.style.transform = `rotate(${rotation}deg) scale(${scale})`
+}
+
+function setRotation(value) {
+  rotation = normalizeRotation(value)
+  elements.rotationOutput.textContent = `${rotation}°`
+  elements.rotationButtons.forEach((button) => {
+    const isSelected = Number(button.dataset.rotation) === rotation
+    button.classList.toggle('is-selected', isSelected)
+    button.setAttribute('aria-pressed', String(isSelected))
+  })
+  updatePreviewRotation()
+  clearResults()
 }
 
 async function selectFiles(fileList) {
@@ -88,6 +119,7 @@ async function selectFiles(fileList) {
 
   try {
     const image = await loadImage(previewUrl)
+    updatePreviewRotation()
     const totalSize = currentFiles.reduce((sum, file) => sum + file.size, 0)
     elements.fileMeta.textContent = `${formatBytes(totalSize)} · 首张 ${image.naturalWidth} × ${image.naturalHeight}`
     elements.dropZone.classList.add('hidden')
@@ -118,9 +150,10 @@ async function convertFile(file) {
   try {
     const image = await loadImage(sourceUrl)
     const limits = getResizeLimits()
+    const rotatedDimensions = calculateRotatedDimensions(image.naturalWidth, image.naturalHeight, rotation)
     const dimensions = calculateTargetDimensions(
-      image.naturalWidth,
-      image.naturalHeight,
+      rotatedDimensions.width,
+      rotatedDimensions.height,
       limits.maxWidth,
       limits.maxHeight,
     )
@@ -137,7 +170,14 @@ async function convertFile(file) {
       context.fillStyle = '#ffffff'
       context.fillRect(0, 0, canvas.width, canvas.height)
     }
-    context.drawImage(image, 0, 0, dimensions.width, dimensions.height)
+    const isQuarterTurn = rotation === 90 || rotation === 270
+    const drawWidth = isQuarterTurn ? dimensions.height : dimensions.width
+    const drawHeight = isQuarterTurn ? dimensions.width : dimensions.height
+    context.save()
+    context.translate(canvas.width / 2, canvas.height / 2)
+    context.rotate(rotation * Math.PI / 180)
+    context.drawImage(image, -drawWidth / 2, -drawHeight / 2, drawWidth, drawHeight)
+    context.restore()
 
     const blob = await new Promise((resolve, reject) => {
       canvas.toBlob(
@@ -216,6 +256,7 @@ function reset() {
   elements.fileInput.value = ''
   elements.workspace.classList.add('hidden')
   elements.dropZone.classList.remove('hidden')
+  setRotation(0)
   showError()
 }
 
@@ -253,6 +294,10 @@ elements.formatButtons.forEach((button) => {
   })
 })
 
+elements.rotationButtons.forEach((button) => {
+  button.addEventListener('click', () => setRotation(button.dataset.rotation))
+})
+
 elements.quality.addEventListener('input', () => {
   const value = Number(elements.quality.value)
   elements.qualityOutput.textContent = `${value}%`
@@ -266,6 +311,7 @@ elements.resizeEnabled.addEventListener('change', () => {
 })
 elements.maxWidth.addEventListener('input', clearResults)
 elements.maxHeight.addEventListener('input', clearResults)
+window.addEventListener('resize', updatePreviewRotation)
 
 elements.downloadAllButton.addEventListener('click', () => {
   const links = [...elements.resultList.querySelectorAll('a')]
