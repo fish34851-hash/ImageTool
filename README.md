@@ -59,6 +59,14 @@ Re-encoding through Canvas produces a new image from pixel data, so source EXIF 
 
 Contributions are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening an issue or pull request.
 
+Project documentation:
+
+- [Roadmap](ROADMAP.md)
+- [Architecture and privacy invariants](docs/ARCHITECTURE.md)
+- [Release process](docs/RELEASING.md)
+- [Maintainers](MAINTAINERS.md)
+- [Security policy](SECURITY.md)
+
 ## License
 
 Licensed under the [MIT License](LICENSE).
