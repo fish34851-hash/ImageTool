@@ -24,14 +24,20 @@ This roadmap describes intended directions, not guaranteed deadlines. Priorities
 - Clear update behavior and cache controls
 - Browser-level offline tests
 
-## In progress
-
 ### v0.4 — Editing and access
 
 - Rotation in 90-degree increments
+- Visible keyboard focus indicators
+- Accessible option groups and live status announcements
+- Reduced-motion support
+
+## Planned
+
+### v0.5 — Cropping and access
+
 - Cropping
 - Additional interface languages
-- Keyboard and screen-reader review
+- Deeper keyboard and screen-reader review
 - More output-size controls
 
 ## Community milestones
