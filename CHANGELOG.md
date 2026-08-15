@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-08-15
+
+### Added
+
+- Installable Progressive Web App manifest and icons
+- Offline app shell powered by a privacy-preserving service worker
+- Install prompt and online/offline status indicator
+- Privacy-friendly system share control and structured user feedback form
+- Automated checks for manifest and offline-cache completeness
+
 ## [0.2.0] - 2026-08-15
 
 ### Added

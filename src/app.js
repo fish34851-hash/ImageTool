@@ -12,8 +12,10 @@ const elements = {
   fileMeta: document.querySelector('#file-meta'),
   fileName: document.querySelector('#file-name'),
   formatButtons: [...document.querySelectorAll('[data-format]')],
+  installButton: document.querySelector('#install-button'),
   maxHeight: document.querySelector('#max-height'),
   maxWidth: document.querySelector('#max-width'),
+  networkStatus: document.querySelector('#network-status'),
   previewImage: document.querySelector('#preview-image'),
   quality: document.querySelector('#quality'),
   qualityOutput: document.querySelector('#quality-output'),
@@ -25,6 +27,7 @@ const elements = {
   resultList: document.querySelector('#result-list'),
   resultSummary: document.querySelector('#result-summary'),
   selectionCount: document.querySelector('#selection-count'),
+  shareButton: document.querySelector('#share-button'),
   workspace: document.querySelector('#workspace'),
 }
 
@@ -32,6 +35,7 @@ let currentFiles = []
 let previewUrl = ''
 let resultUrls = []
 let outputFormat = 'image/webp'
+let deferredInstallPrompt = null
 
 function showError(message = '') {
   elements.errorMessage.textContent = message
@@ -267,6 +271,62 @@ elements.downloadAllButton.addEventListener('click', () => {
   const links = [...elements.resultList.querySelectorAll('a')]
   links.forEach((link, index) => setTimeout(() => link.click(), index * 180))
 })
+
+elements.shareButton.addEventListener('click', async () => {
+  const shareData = {
+    title: 'ImageTool',
+    text: '无需上传图片的批量转换与压缩工具',
+    url: 'https://fish34851-hash.github.io/ImageTool/',
+  }
+
+  try {
+    if (navigator.share) await navigator.share(shareData)
+    else {
+      await navigator.clipboard.writeText(shareData.url)
+      elements.shareButton.textContent = '链接已复制'
+      setTimeout(() => { elements.shareButton.textContent = '分享' }, 1800)
+    }
+  } catch (error) {
+    if (error.name !== 'AbortError') showError('暂时无法分享，请复制浏览器地址。')
+  }
+})
+
+function updateNetworkStatus() {
+  const isOnline = navigator.onLine
+  elements.networkStatus.textContent = isOnline ? '在线' : '离线可用'
+  elements.networkStatus.classList.toggle('is-offline', !isOnline)
+}
+
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault()
+  deferredInstallPrompt = event
+  elements.installButton.classList.remove('hidden')
+})
+
+elements.installButton.addEventListener('click', async () => {
+  if (!deferredInstallPrompt) return
+  deferredInstallPrompt.prompt()
+  await deferredInstallPrompt.userChoice
+  deferredInstallPrompt = null
+  elements.installButton.classList.add('hidden')
+})
+
+window.addEventListener('appinstalled', () => {
+  deferredInstallPrompt = null
+  elements.installButton.classList.add('hidden')
+})
+
+window.addEventListener('online', updateNetworkStatus)
+window.addEventListener('offline', updateNetworkStatus)
+updateNetworkStatus()
+
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js').catch((error) => {
+      console.warn('ImageTool offline support could not be enabled.', error)
+    })
+  })
+}
 
 window.addEventListener('beforeunload', () => {
   if (previewUrl) URL.revokeObjectURL(previewUrl)

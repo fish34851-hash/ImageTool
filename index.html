@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="ImageTool 是一个完全在浏览器本地运行的批量图片转换与尺寸调整工具。" />
     <meta name="theme-color" content="#f5f1e8" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./assets/icon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./src/styles.css" />
     <title>ImageTool — 私密的本地图片工具</title>
   </head>
@@ -15,12 +17,15 @@
           <span class="brand-mark">I</span>
           <span>ImageTool</span>
         </a>
-        <div class="privacy-pill">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <rect x="5" y="10" width="14" height="10" rx="2"></rect>
-            <path d="M8.5 10V7.5a3.5 3.5 0 0 1 7 0V10"></path>
-          </svg>
-          <span>100% 本地处理</span>
+        <div class="header-actions">
+          <button class="install-button hidden" id="install-button" type="button">安装应用</button>
+          <div class="privacy-pill">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="5" y="10" width="14" height="10" rx="2"></rect>
+              <path d="M8.5 10V7.5a3.5 3.5 0 0 1 7 0V10"></path>
+            </svg>
+            <span>100% 本地处理</span>
+          </div>
         </div>
       </header>
 
@@ -125,7 +130,12 @@
 
       <footer>
         <span>ImageTool · 你的图片只属于你</span>
-        <a href="https://github.com/fish34851-hash/ImageTool">GitHub</a>
+        <div class="footer-links">
+          <span class="network-status" id="network-status">在线</span>
+          <button class="footer-button" id="share-button" type="button">分享</button>
+          <a href="https://github.com/fish34851-hash/ImageTool/issues/new/choose">反馈</a>
+          <a href="https://github.com/fish34851-hash/ImageTool">GitHub</a>
+        </div>
       </footer>
     </div>
 

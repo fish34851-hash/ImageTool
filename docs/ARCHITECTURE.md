@@ -8,6 +8,9 @@ ImageTool is a zero-dependency static web application. It can run from a local f
 - `src/app.js` owns browser interaction, image decoding, Canvas rendering, and downloads.
 - `src/core.js` contains deterministic formatting, filename, and resize calculations shared by the app and tests.
 - `src/styles.css` provides the responsive visual system.
+- `manifest.webmanifest` describes the installable application experience.
+- `service-worker.js` caches only the same-origin application shell for offline use.
+- `assets/` contains source SVG and rasterized PWA icons.
 - `server.js` is an optional local development server built only with Node.js standard modules.
 
 ## Image data flow
@@ -23,6 +26,7 @@ ImageTool is a zero-dependency static web application. It can run from a local f
 
 - Selected images must never be uploaded or included in a network request.
 - The application must not add analytics, advertising, remote scripts, or remote fonts.
+- Offline caching must remain limited to same-origin application assets and must not cache selected images or converted results.
 - Output files are created from decoded pixels; source EXIF and other file metadata are not copied.
 - Features that would weaken these guarantees require prior public discussion and documentation.
 

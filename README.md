@@ -20,6 +20,7 @@ ImageTool converts PNG, JPG, and WebP images locally. Your files are never uploa
 - Responsive interface for desktop and mobile
 - Zero runtime dependencies
 - Remove source metadata by re-encoding image pixels in the browser
+- Install the app and use its core interface offline
 
 ## Try it locally
 
@@ -35,6 +36,12 @@ Then open <http://127.0.0.1:5173>.
 
 No `npm install` step is required.
 
+## Install for offline use
+
+Open the [live ImageTool site](https://fish34851-hash.github.io/ImageTool/) in Chrome or Edge. Use the **Install app** control in the browser or the in-page install button when it appears.
+
+After the first successful visit, the application shell can open without reaching the server. Image files and converted results remain temporary local browser data and are not added to the offline cache.
+
 ## Check the code
 
 ```bash
@@ -48,6 +55,8 @@ ImageTool uses the browser's Canvas API. Selected images stay on your device and
 
 Re-encoding through Canvas produces a new image from pixel data, so source EXIF and other file metadata are not copied to the output.
 
+The offline service worker caches only same-origin ImageTool application files. It does not intercept, upload, or store selected images.
+
 ## Roadmap
 
 - Offline installation as a Progressive Web App
@@ -58,6 +67,8 @@ Re-encoding through Canvas produces a new image from pixel data, so source EXIF 
 ## Contributing
 
 Contributions are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening an issue or pull request.
+
+Used ImageTool for a real task? [Share feedback](https://github.com/fish34851-hash/ImageTool/issues/new/choose) without uploading any private images. Reports from real users guide the roadmap.
 
 Project documentation:
 
