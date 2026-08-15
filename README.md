@@ -6,6 +6,8 @@ A simple, privacy-friendly image converter that runs entirely in your browser.
 
 ImageTool converts PNG, JPG, and WebP images locally. Your files are never uploaded to a server.
 
+**[Try ImageTool online](https://fish34851-hash.github.io/ImageTool/)** · [Share real-world feedback](https://github.com/fish34851-hash/ImageTool/issues/new/choose)
+
 ![ImageTool preview](preview.png)
 
 ## Features
@@ -77,6 +79,7 @@ Project documentation:
 - [Release process](docs/RELEASING.md)
 - [Maintainers](MAINTAINERS.md)
 - [Security policy](SECURITY.md)
+- [Five-minute user test](docs/USER_TESTING.md)
 
 ## License
 
