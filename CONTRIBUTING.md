@@ -18,6 +18,7 @@ Before submitting a pull request, confirm that the JavaScript syntax check succe
 
 ```bash
 npm run check
+npm test
 ```
 
 ## Pull requests
@@ -25,4 +26,5 @@ npm run check
 - Explain what changed and why.
 - Include screenshots for visual changes.
 - Test with at least one PNG, JPG, or WebP file when changing conversion behavior.
+- Add or update automated tests when changing shared utility behavior.
 - Use clear, respectful language.
