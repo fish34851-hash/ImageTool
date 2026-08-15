@@ -12,8 +12,10 @@ const elements = {
   fileMeta: document.querySelector('#file-meta'),
   fileName: document.querySelector('#file-name'),
   formatButtons: [...document.querySelectorAll('[data-format]')],
+  installButton: document.querySelector('#install-button'),
   maxHeight: document.querySelector('#max-height'),
   maxWidth: document.querySelector('#max-width'),
+  networkStatus: document.querySelector('#network-status'),
   previewImage: document.querySelector('#preview-image'),
   quality: document.querySelector('#quality'),
   qualityOutput: document.querySelector('#quality-output'),
@@ -32,6 +34,7 @@ let currentFiles = []
 let previewUrl = ''
 let resultUrls = []
 let outputFormat = 'image/webp'
+let deferredInstallPrompt = null
 
 function showError(message = '') {
   elements.errorMessage.textContent = message
@@ -267,6 +270,43 @@ elements.downloadAllButton.addEventListener('click', () => {
   const links = [...elements.resultList.querySelectorAll('a')]
   links.forEach((link, index) => setTimeout(() => link.click(), index * 180))
 })
+
+function updateNetworkStatus() {
+  const isOnline = navigator.onLine
+  elements.networkStatus.textContent = isOnline ? '在线' : '离线可用'
+  elements.networkStatus.classList.toggle('is-offline', !isOnline)
+}
+
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault()
+  deferredInstallPrompt = event
+  elements.installButton.classList.remove('hidden')
+})
+
+elements.installButton.addEventListener('click', async () => {
+  if (!deferredInstallPrompt) return
+  deferredInstallPrompt.prompt()
+  await deferredInstallPrompt.userChoice
+  deferredInstallPrompt = null
+  elements.installButton.classList.add('hidden')
+})
+
+window.addEventListener('appinstalled', () => {
+  deferredInstallPrompt = null
+  elements.installButton.classList.add('hidden')
+})
+
+window.addEventListener('online', updateNetworkStatus)
+window.addEventListener('offline', updateNetworkStatus)
+updateNetworkStatus()
+
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js').catch((error) => {
+      console.warn('ImageTool offline support could not be enabled.', error)
+    })
+  })
+}
 
 window.addEventListener('beforeunload', () => {
   if (previewUrl) URL.revokeObjectURL(previewUrl)

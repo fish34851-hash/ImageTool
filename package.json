@@ -1,11 +1,11 @@
 {
   "name": "imagetool",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A private, browser-based image converter with zero dependencies.",
   "scripts": {
     "dev": "node server.js",
-    "check": "node --check src/core.js && node --check src/app.js && node --check server.js",
+    "check": "node --check src/core.js && node --check src/app.js && node --check service-worker.js && node --check server.js",
     "test": "node --test tests/*.test.js"
   },
   "keywords": ["image", "converter", "privacy", "png", "jpeg", "webp"],

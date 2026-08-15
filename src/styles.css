@@ -37,6 +37,21 @@ button, a { -webkit-tap-highlight-color: transparent; }
   justify-content: space-between;
 }
 
+.header-actions { display: flex; align-items: center; gap: 9px; }
+
+.install-button {
+  padding: 8px 12px;
+  color: #fff;
+  border: 0;
+  border-radius: 999px;
+  background: #2e4a37;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.install-button:hover { background: #223e2c; }
+
 .brand {
   display: inline-flex;
   gap: 10px;
@@ -453,6 +468,11 @@ footer {
 }
 
 footer a { color: #59685b; font-weight: 600; text-decoration: none; }
+.footer-links { display: flex; align-items: center; gap: 15px; }
+.network-status { display: inline-flex; align-items: center; gap: 5px; }
+.network-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #6e8a71; }
+.network-status.is-offline { color: #52705a; font-weight: 600; }
+.network-status.is-offline::before { background: #d49353; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 @media (max-width: 720px) {
@@ -470,6 +490,7 @@ footer a { color: #59685b; font-weight: 600; text-decoration: none; }
 }
 
 @media (max-width: 430px) {
+  .install-button { padding: 8px 10px; font-size: 10px; }
   .privacy-pill span { display: none; }
   .privacy-pill { padding: 8px; }
   .tool-card { padding: 7px; border-radius: 20px; }

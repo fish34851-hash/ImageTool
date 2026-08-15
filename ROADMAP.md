@@ -10,8 +10,6 @@ This roadmap describes intended directions, not guaranteed deadlines. Priorities
 - Quality controls and image preview
 - Privacy-first, zero-dependency browser architecture
 
-## In progress
-
 ### v0.2 — Batch workflow and maintainability
 
 - Batch conversion for up to 20 images
@@ -19,7 +17,7 @@ This roadmap describes intended directions, not guaranteed deadlines. Priorities
 - Automated tests and pull-request checks
 - Security, contribution, and community documentation
 
-## Planned
+## In progress
 
 ### v0.3 — Offline installation
 
@@ -27,6 +25,8 @@ This roadmap describes intended directions, not guaranteed deadlines. Priorities
 - Offline app shell
 - Clear update behavior and cache controls
 - Browser-level offline tests
+
+## Planned
 
 ### v0.4 — Editing and access
 
