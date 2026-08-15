@@ -24,6 +24,22 @@
     return `${baseName}-converted.${extension}`
   }
 
+  function normalizeRotation(rotation) {
+    const normalized = ((Number(rotation) || 0) % 360 + 360) % 360
+    return [0, 90, 180, 270].includes(normalized) ? normalized : 0
+  }
+
+  function calculateRotatedDimensions(width, height, rotation = 0) {
+    const safeWidth = Math.max(1, Number(width) || 1)
+    const safeHeight = Math.max(1, Number(height) || 1)
+    const normalizedRotation = normalizeRotation(rotation)
+    const isQuarterTurn = normalizedRotation === 90 || normalizedRotation === 270
+
+    return isQuarterTurn
+      ? { width: safeHeight, height: safeWidth }
+      : { width: safeWidth, height: safeHeight }
+  }
+
   function calculateTargetDimensions(width, height, maxWidth = 0, maxHeight = 0) {
     const safeWidth = Math.max(1, Number(width) || 1)
     const safeHeight = Math.max(1, Number(height) || 1)
@@ -37,5 +53,11 @@
     }
   }
 
-  return { calculateTargetDimensions, formatBytes, makeOutputName }
+  return {
+    calculateRotatedDimensions,
+    calculateTargetDimensions,
+    formatBytes,
+    makeOutputName,
+    normalizeRotation,
+  }
 }))

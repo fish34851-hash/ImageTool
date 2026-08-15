@@ -71,7 +71,7 @@
             <div class="settings-panel">
               <div>
                 <p class="section-label">输出格式</p>
-                <div class="format-grid" id="format-grid">
+                <div class="format-grid" id="format-grid" role="group" aria-label="输出格式">
                   <button class="format-option is-selected" type="button" data-format="image/webp" aria-pressed="true">
                     <strong>WebP</strong><span>更小的文件</span>
                   </button>
@@ -93,6 +93,19 @@
                 <div class="range-labels"><span>文件更小</span><span>画质更高</span></div>
               </div>
 
+              <div class="rotation-setting">
+                <div class="rotation-header">
+                  <p class="section-label">旋转图片</p>
+                  <output id="rotation-output">0°</output>
+                </div>
+                <div class="rotation-grid" id="rotation-grid" role="group" aria-label="旋转图片">
+                  <button class="rotation-option is-selected" type="button" data-rotation="0" aria-pressed="true">原方向</button>
+                  <button class="rotation-option" type="button" data-rotation="90" aria-pressed="false">右转 90°</button>
+                  <button class="rotation-option" type="button" data-rotation="180" aria-pressed="false">180°</button>
+                  <button class="rotation-option" type="button" data-rotation="270" aria-pressed="false">左转 90°</button>
+                </div>
+              </div>
+
               <div class="resize-setting">
                 <label class="toggle-row" for="resize-enabled">
                   <span><strong>限制图片尺寸</strong><small>保持比例，不会放大小图</small></span>
@@ -107,7 +120,7 @@
 
               <button class="convert-button" id="convert-button" type="button">开始转换</button>
 
-              <div class="result-box hidden" id="result-box" role="status">
+              <div class="result-box hidden" id="result-box" role="status" aria-live="polite">
                 <div class="result-header">
                   <div><span>转换完成</span><strong id="result-summary"></strong></div>
                   <button class="download-all-button hidden" id="download-all-button" type="button">全部下载</button>
@@ -131,7 +144,7 @@
       <footer>
         <span>ImageTool · 你的图片只属于你</span>
         <div class="footer-links">
-          <span class="network-status" id="network-status">在线</span>
+          <span class="network-status" id="network-status" role="status" aria-live="polite">在线</span>
           <button class="footer-button" id="share-button" type="button">分享</button>
           <a href="https://github.com/fish34851-hash/ImageTool/issues/new/choose">反馈</a>
           <a href="https://github.com/fish34851-hash/ImageTool">GitHub</a>

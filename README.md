@@ -13,6 +13,7 @@ ImageTool converts PNG, JPG, and WebP images locally. Your files are never uploa
 - Convert images to PNG, JPG, or WebP
 - Convert up to 20 images in one batch
 - Resize images proportionally with optional width and height limits
+- Rotate images in 90-degree increments before conversion
 - Adjust JPG and WebP quality
 - Drag and drop or browse for a file
 - Preview the image before conversion
@@ -59,8 +60,7 @@ The offline service worker caches only same-origin ImageTool application files. 
 
 ## Roadmap
 
-- Offline installation as a Progressive Web App
-- Image rotation and cropping
+- Image cropping
 - More browser-level conversion tests
 - Additional interface languages
 

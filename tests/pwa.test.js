@@ -50,5 +50,5 @@ test('service worker pre-caches the complete app shell', () => {
     './src/app.js',
   ]
   expectedAssets.forEach((asset) => assert.ok(serviceWorker.includes(`'${asset}'`), `${asset} should be cached`))
-  assert.match(serviceWorker, /CACHE_NAME = 'imagetool-v0\.3\.0'/)
+  assert.match(serviceWorker, /CACHE_NAME = 'imagetool-v0\.4\.0'/)
 })
