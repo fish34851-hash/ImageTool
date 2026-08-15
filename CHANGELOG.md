@@ -6,6 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-08-15
+
+### Added
+
+- Batch conversion for up to 20 images
+- Optional proportional resizing with width and height limits
+- Individual and batch download controls
+- Automated unit tests for shared image utilities
+- GitHub Actions checks for every pull request
+
+### Changed
+
+- Clarified that browser re-encoding removes source image metadata
+- Improved conversion progress and multi-file feedback
+
 ## [0.1.0] - 2026-08-15
 
 ### Added

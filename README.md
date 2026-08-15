@@ -1,5 +1,7 @@
 # ImageTool
 
+[![CI](https://github.com/fish34851-hash/ImageTool/actions/workflows/ci.yml/badge.svg)](https://github.com/fish34851-hash/ImageTool/actions/workflows/ci.yml)
+
 A simple, privacy-friendly image converter that runs entirely in your browser.
 
 ImageTool converts PNG, JPG, and WebP images locally. Your files are never uploaded to a server.
@@ -9,12 +11,15 @@ ImageTool converts PNG, JPG, and WebP images locally. Your files are never uploa
 ## Features
 
 - Convert images to PNG, JPG, or WebP
+- Convert up to 20 images in one batch
+- Resize images proportionally with optional width and height limits
 - Adjust JPG and WebP quality
 - Drag and drop or browse for a file
 - Preview the image before conversion
 - Process every image locally in the browser
 - Responsive interface for desktop and mobile
 - Zero runtime dependencies
+- Remove source metadata by re-encoding image pixels in the browser
 
 ## Try it locally
 
@@ -34,15 +39,33 @@ No `npm install` step is required.
 
 ```bash
 npm run check
+npm test
 ```
 
 ## Privacy
 
 ImageTool uses the browser's Canvas API. Selected images stay on your device and are not sent to any server. The app does not load external fonts, scripts, analytics, or trackers.
 
+Re-encoding through Canvas produces a new image from pixel data, so source EXIF and other file metadata are not copied to the output.
+
+## Roadmap
+
+- Offline installation as a Progressive Web App
+- Image rotation and cropping
+- More browser-level conversion tests
+- Additional interface languages
+
 ## Contributing
 
 Contributions are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening an issue or pull request.
+
+Project documentation:
+
+- [Roadmap](ROADMAP.md)
+- [Architecture and privacy invariants](docs/ARCHITECTURE.md)
+- [Release process](docs/RELEASING.md)
+- [Maintainers](MAINTAINERS.md)
+- [Security policy](SECURITY.md)
 
 ## License
 
