@@ -17,8 +17,6 @@ This roadmap describes intended directions, not guaranteed deadlines. Priorities
 - Automated tests and pull-request checks
 - Security, contribution, and community documentation
 
-## In progress
-
 ### v0.3 — Offline installation
 
 - Progressive Web App manifest
