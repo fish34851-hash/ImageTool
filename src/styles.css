@@ -469,6 +469,8 @@ footer {
 
 footer a { color: #59685b; font-weight: 600; text-decoration: none; }
 .footer-links { display: flex; align-items: center; gap: 15px; }
+.footer-button { padding: 0; color: #59685b; border: 0; background: transparent; font-size: inherit; font-weight: 600; cursor: pointer; }
+.footer-button:hover, footer a:hover { color: #2f503a; }
 .network-status { display: inline-flex; align-items: center; gap: 5px; }
 .network-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #6e8a71; }
 .network-status.is-offline { color: #52705a; font-weight: 600; }
@@ -497,6 +499,8 @@ footer a { color: #59685b; font-weight: 600; text-decoration: none; }
   .drop-zone { min-height: 300px; padding: 22px; }
   .format-option span { display: none; }
   footer span { max-width: 190px; }
+  .network-status { display: none; }
+  .footer-links { gap: 10px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

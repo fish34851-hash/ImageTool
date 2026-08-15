@@ -27,6 +27,7 @@ const elements = {
   resultList: document.querySelector('#result-list'),
   resultSummary: document.querySelector('#result-summary'),
   selectionCount: document.querySelector('#selection-count'),
+  shareButton: document.querySelector('#share-button'),
   workspace: document.querySelector('#workspace'),
 }
 
@@ -269,6 +270,25 @@ elements.maxHeight.addEventListener('input', clearResults)
 elements.downloadAllButton.addEventListener('click', () => {
   const links = [...elements.resultList.querySelectorAll('a')]
   links.forEach((link, index) => setTimeout(() => link.click(), index * 180))
+})
+
+elements.shareButton.addEventListener('click', async () => {
+  const shareData = {
+    title: 'ImageTool',
+    text: '无需上传图片的批量转换与压缩工具',
+    url: 'https://fish34851-hash.github.io/ImageTool/',
+  }
+
+  try {
+    if (navigator.share) await navigator.share(shareData)
+    else {
+      await navigator.clipboard.writeText(shareData.url)
+      elements.shareButton.textContent = '链接已复制'
+      setTimeout(() => { elements.shareButton.textContent = '分享' }, 1800)
+    }
+  } catch (error) {
+    if (error.name !== 'AbortError') showError('暂时无法分享，请复制浏览器地址。')
+  }
 })
 
 function updateNetworkStatus() {

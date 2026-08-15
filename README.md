@@ -68,6 +68,8 @@ The offline service worker caches only same-origin ImageTool application files. 
 
 Contributions are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening an issue or pull request.
 
+Used ImageTool for a real task? [Share feedback](https://github.com/fish34851-hash/ImageTool/issues/new/choose) without uploading any private images. Reports from real users guide the roadmap.
+
 Project documentation:
 
 - [Roadmap](ROADMAP.md)

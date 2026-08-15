@@ -1,0 +1,36 @@
+name: User feedback
+description: Tell us how ImageTool worked for you
+title: "[Feedback]: "
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for using ImageTool. Real usage feedback helps decide what to build next.
+  - type: dropdown
+    id: task
+    attributes:
+      label: What did you use ImageTool for?
+      options:
+        - Convert image formats
+        - Compress images
+        - Resize images
+        - Remove image metadata
+        - Offline use
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: What worked or did not work?
+      description: Do not attach private or sensitive images.
+    validations:
+      required: true
+  - type: textarea
+    id: improvement
+    attributes:
+      label: What would make ImageTool more useful?
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and device
+      placeholder: Edge on Windows 11, Safari on iPhone, etc.
