@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="ImageTool 是一个完全在浏览器本地运行的隐私友好图片格式转换工具。" />
+    <meta name="theme-color" content="#f5f1e8" />
+    <link rel="stylesheet" href="./src/styles.css" />
+    <title>ImageTool — 本地图片转换</title>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="./" aria-label="ImageTool 首页">
+          <span class="brand-mark">I</span>
+          <span>ImageTool</span>
+        </a>
+        <div class="privacy-pill">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="5" y="10" width="14" height="10" rx="2"></rect>
+            <path d="M8.5 10V7.5a3.5 3.5 0 0 1 7 0V10"></path>
+          </svg>
+          <span>100% 本地处理</span>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <p class="eyebrow">SIMPLE · PRIVATE · FREE</p>
+          <h1>转换图片，<span>不上传图片。</span></h1>
+          <p class="hero-copy">
+            快速转换 PNG、JPG 和 WebP。所有处理都在你的浏览器中完成，
+            图片不会离开你的设备。
+          </p>
+        </section>
+
+        <section class="tool-card" aria-label="图片转换工具">
+          <div class="drop-zone" id="drop-zone">
+            <div class="upload-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14.5v3A2.5 2.5 0 0 0 7.5 20h9a2.5 2.5 0 0 0 2.5-2.5v-3"></path>
+              </svg>
+            </div>
+            <h2>把图片拖到这里</h2>
+            <p>或者从电脑中选择一张图片</p>
+            <button class="primary-button" id="choose-button" type="button">选择图片</button>
+            <span class="file-note">支持 PNG、JPG、WebP</span>
+          </div>
+
+          <div class="workspace hidden" id="workspace">
+            <div class="preview-panel">
+              <div class="preview-frame">
+                <img id="preview-image" alt="所选图片预览" />
+              </div>
+              <div class="file-details">
+                <div>
+                  <strong id="file-name"></strong>
+                  <span id="file-meta"></span>
+                </div>
+                <button class="text-button" id="reset-button" type="button">更换图片</button>
+              </div>
+            </div>
+
+            <div class="settings-panel">
+              <div>
+                <p class="section-label">输出格式</p>
+                <div class="format-grid" id="format-grid">
+                  <button class="format-option is-selected" type="button" data-format="image/webp" aria-pressed="true">
+                    <strong>WebP</strong><span>更小的文件</span>
+                  </button>
+                  <button class="format-option" type="button" data-format="image/jpeg" aria-pressed="false">
+                    <strong>JPG</strong><span>兼容性最好</span>
+                  </button>
+                  <button class="format-option" type="button" data-format="image/png" aria-pressed="false">
+                    <strong>PNG</strong><span>保留透明背景</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="quality-setting" id="quality-setting">
+                <div class="quality-header">
+                  <label for="quality">图片质量</label>
+                  <output id="quality-output" for="quality">88%</output>
+                </div>
+                <input id="quality" type="range" min="40" max="100" value="88" style="--range-progress: 80%" />
+                <div class="range-labels"><span>文件更小</span><span>画质更高</span></div>
+              </div>
+
+              <button class="convert-button" id="convert-button" type="button">开始转换</button>
+
+              <div class="result-box hidden" id="result-box" role="status">
+                <div><span>转换完成</span><strong id="result-size"></strong></div>
+                <a class="download-button" id="download-button" href="#" download>下载图片</a>
+              </div>
+            </div>
+          </div>
+
+          <input class="visually-hidden" id="file-input" type="file" accept="image/png,image/jpeg,image/webp" />
+          <p class="error-message hidden" id="error-message" role="alert"></p>
+        </section>
+
+        <section class="trust-row" aria-label="产品特点">
+          <div><span>01</span><p><strong>隐私优先</strong>文件永不上传</p></div>
+          <div><span>02</span><p><strong>快速转换</strong>无需等待服务器</p></div>
+          <div><span>03</span><p><strong>开源免费</strong>代码公开透明</p></div>
+        </section>
+      </main>
+
+      <footer>
+        <span>ImageTool · 你的图片只属于你</span>
+        <a href="https://github.com/fish34851-hash/ImageTool">GitHub</a>
+      </footer>
+    </div>
+
+    <script src="./src/app.js" defer></script>
+  </body>
+</html>

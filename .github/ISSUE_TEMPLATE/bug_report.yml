@@ -1,0 +1,29 @@
+name: Bug report
+description: Report something that is not working correctly
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for helping improve ImageTool.
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the problem and what you expected to happen.
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser
+      placeholder: Chrome 140, Firefox 142, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. Select a PNG file\n2. Choose WebP\n3. Click Convert"
+    validations:
+      required: true
